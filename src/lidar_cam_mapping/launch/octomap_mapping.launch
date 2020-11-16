@@ -1,0 +1,29 @@
+<!-- 
+  Example launch file for octomap_server mapping: 
+  Listens to incoming PointCloud2 data and incrementally builds an octomap. 
+  The data is sent out in different representations. 
+
+  Copy this file into your workspace and adjust as needed, see
+  www.ros.org/wiki/octomap_server for details  
+-->
+<launch>
+	<node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+		<param name="resolution" value="0.05" /> <!--default 0.05>-->
+		
+		<!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+		<param name="frame_id" type="string" value="map" />
+		
+		<!-- maximum range to integrate (speedup!) -->
+		<param name="sensor_model/max_range" value="4.0" />
+		
+		<!-- data source to integrate (/PointCloud2), /camera/depth/points -->
+		<remap from="cloud_in" to="/camera/depth/points" />
+	</node>
+	
+	<!-- From laser scan to PointCloud2
+	<node pkg="lidar_cam_mapping" name="laser2pc2" type="laser2pc.py" output="screen"/>-->
+	
+	<!-- launch realsense node without driver (useful for create /camera/depth_points from /camera/depth/image_raw)
+	<include file="$(find lidar_cam_mapping)/launch/sensors/realsense_r200_rosbag.launch" />-->
+
+</launch>

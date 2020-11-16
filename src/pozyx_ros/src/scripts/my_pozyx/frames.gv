@@ -1,0 +1,13 @@
+digraph G {
+"UWB" -> "tag0_frame_f"[label="Broadcaster: /tag_0_filter\nAverage rate: 334.378 Hz\nMost recent transform: 1602154025.079 ( 0.004 sec old)\nBuffer length: 4.917 sec\n"];
+"map" -> "UWB"[label="Broadcaster: /map2UWB\nAverage rate: 5.221 Hz\nMost recent transform: 1602154025.173 ( -0.091 sec old)\nBuffer length: 9.960 sec\n"];
+"UWB" -> "tag1_frame_f"[label="Broadcaster: /tag_1_filter\nAverage rate: 487.559 Hz\nMost recent transform: 1602154025.080 ( 0.003 sec old)\nBuffer length: 4.898 sec\n"];
+"UWB" -> "tag1_frame"[label="Broadcaster: /pose_pub_2_tag\nAverage rate: 17.296 Hz\nMost recent transform: 1602154025.046 ( 0.036 sec old)\nBuffer length: 4.857 sec\n"];
+"UWB" -> "tag0_frame"[label="Broadcaster: /pose_pub_2_tag\nAverage rate: 17.316 Hz\nMost recent transform: 1602154025.079 ( 0.004 sec old)\nBuffer length: 4.851 sec\n"];
+"base_link" -> "laser"[label="Broadcaster: /base_link2laser\nAverage rate: 10.174 Hz\nMost recent transform: 1602154025.101 ( -0.018 sec old)\nBuffer length: 4.718 sec\n"];
+"tag0_frame" -> "base_link"[label="Broadcaster: /tag0_frame2base_link\nAverage rate: 10.181 Hz\nMost recent transform: 1602154025.106 ( -0.024 sec old)\nBuffer length: 4.715 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1602154025.082"[ shape=plaintext ] ;
+ }->"map";
+}

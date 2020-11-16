@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<launch>
+	
+<!-- True solo con rosbag -->
+<param name="/use_sim_time" value="false"/>
+
+<!-- Start Lidar -->
+  <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+		<param name="serial_port"         type="string" value="/dev/ttyUSB0"/>  
+		<param name="serial_baudrate"     type="int"    value="256000"/><!--A3 -->
+		<param name="frame_id"            type="string" value="laser"/>
+		<param name="inverted"            type="bool"   value="false"/>
+		<param name="angle_compensate"    type="bool"   value="true"/>
+		<param name="scan_mode"           type="string" value="Sensitivity"/>
+	</node>
+
+<!--Hector Mapping-->
+<node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen" >
+	<param name="pub_odometry" value="false" />
+    
+    <!-- Frames -->
+	<param name="map_frame" value="map" />
+	<param name="base_frame" value="base_stabilized" />
+	<!-- odom_frame coincide con il base frame perchè non viene utilizzata l'odometria era base_footprint  -->
+	<param name="odom_frame" value="base_stabilized" /> 
+    
+    <!-- Tf -->
+	<!-- Debug(se attivo): pubblica direttamente la tf fra il frame fisso (map) 
+	e il frame elaborato dallo scan (base_footprint)-->
+	<param name="pub_map_scanmatch_transform" value="false"/> 
+	<param name="tf_map_scanmatch_transform_frame_name" value="scanmatched_frame" /> 
+
+    <!-- Map settings -->
+    <param name="map_resolution" value="0.025"/>
+    <param name="map_size" value="4048"/>
+	<!-- numero di mappe (a risoluzione diversa) utilizzate per lo scan matching-->
+    <param name="map_multi_res_levels" value="3" />
+    
+    <!-- Map update parameters -->  
+    <param name="map_update_distance_thresh" value="0.4"/>
+    <param name="map_update_angle_thresh" value="0.9" />
+    <param name="laser_z_min_value" value = "-1" />
+    <param name="laser_z_max_value" value = "1" />
+	<param name="laser_max_dist" value = "6" />
+	<param name="laser_min_dist" value = "0.1" />   
+    
+    <!-- Altro --> 
+    <param name="scan_subscriber_queue_size" value="5"/>
+    <param name="scan_topic" value="scan"/>
+</node>
+
+<!--Rviz-->
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find lidar_cam_mapping)/rviz.rviz" />
+
+<!--Geotiff (serve per salvare la mappa)-->
+<include file="$(find lidar_cam_mapping)/launch/hector_geotiff_trajectory.launch"/>
+
+
+<!-- base_stabilized -> Laser versione BIPE-->
+ <node pkg="tf" type="static_transform_publisher" name="IMU2laser_tf" args="0 0 0 0 0 0 base_stabilized laser 100"/> 
+
+
+
+</launch>
+  

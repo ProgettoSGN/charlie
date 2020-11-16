@@ -1,0 +1,8 @@
+prefix=/home/robot/charlie_ws/install
+
+Name: robot_navigation
+Description: Description of robot_navigation
+Version: 1.2.3
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

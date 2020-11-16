@@ -1,0 +1,8 @@
+prefix=/home/robot/charlie_ws/devel
+
+Name: polar_scan_matcher
+Description: Description of polar_scan_matcher
+Version: 0.3.2
+Cflags: -I/home/robot/charlie_ws/src/scan_tools-kinetic/polar_scan_matcher/include
+Libs: -L${prefix}/lib -lpolar_scan_matcher
+Requires: 

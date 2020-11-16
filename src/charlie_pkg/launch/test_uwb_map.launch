@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!--<arg name="IS_TWISTSTAMPED" default="true" /-->
+  <param name ="/use_sim_time" 	    value="false"/>
+    
+  <!-- Load map, static TF and position fixing /-->
+	<!--node name="map_server" pkg="map_server" type="map_server" args="/home/robot/salotto.yaml"/-->
+	<node name="map_server" pkg="map_server" type="map_server" args="/home/robot/casatonfano.yaml"/>
+
+
+  
+	
+	<!-- Start node for UWB pose transformation in map frame and pose fix /-->
+	<node pkg="pozyx_ros" type="tag_in_map.py" name="tag_in_map"  output="screen"> </node>
+
+	
+	<node name="serial" pkg="serial_manager" type="SerialManager_Luca"/>
+	
+
+
+</launch>

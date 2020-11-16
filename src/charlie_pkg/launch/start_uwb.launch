@@ -1,0 +1,5 @@
+<launch>
+	<node pkg="pozyx_ros" type="pose_pub_2_tag.py" name="pose_pub_2_tag"  output="screen"> </node>
+	<node pkg="pozyx_ros" type="filter_stamped.py" name="tag_0_filter"  output="screen"> </node>
+	<node pkg="pozyx_ros" type="filter_stamped_second_ch.py" name="tag_1_filter"  output="screen"> </node>
+</launch>

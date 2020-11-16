@@ -1,0 +1,8 @@
+prefix=/home/robot/charlie_ws/devel
+
+Name: icaro_uwb
+Description: Description of icaro_uwb
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
